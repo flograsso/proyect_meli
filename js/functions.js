@@ -80,7 +80,6 @@ $(document).ready(function(){
         [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
     ];
      
-    $('#example').dataTable().fnDestroy();
     $('#example').DataTable( {
         destroy: true,
         data: dataSet,
