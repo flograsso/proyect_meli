@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var arrayPreguntas = [];
+    var arrayPreguntas = [][];
 
     $("#enviarQuery").click(function() 
     {
