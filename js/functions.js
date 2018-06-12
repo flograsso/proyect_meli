@@ -79,7 +79,7 @@ $(document).ready(function(){
     ];
      
     $(document).ready(function() {
-        $('#example').DataTable( {
+        $('#example1').DataTable( {
             data: dataSet,
             columns: [
                 { title: "Name" },
