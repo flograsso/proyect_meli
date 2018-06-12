@@ -11,15 +11,22 @@ $(document).ready(function(){
                         'query':$("#consulta").val()
                     },
             success:  function (response) {
-                $("#resultado").val(response);
- 
-
-                
-            
+                $("#resultado").val(response);                 
             }
         });
     });
 
+    $('#myTable').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "includes/internalRequest.php",
+            "data": function ( d ) {
+                d.method = "getQuestions";
+
+            }
+        }
+    } );
     
       
 

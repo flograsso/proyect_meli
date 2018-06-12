@@ -13,6 +13,9 @@ switch ($METHOD)
         $path=$_POST["query"];
         echo json_encode(getMeli($path));
         break;
+    case "getQuestions":
+        echo getAllValuesDb('questions');
+        break;
 
 	default:
 		break;
