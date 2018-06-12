@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var arrayPreguntas;
+    var arrayPreguntas = [];
 
     $("#enviarQuery").click(function() 
     {
@@ -25,9 +25,12 @@ $(document).ready(function(){
                     'method':'getQuestions',
                 },
         success:  function (response) {
-            arrayPreguntas=JSON.parse(response) ;    
-            console.log(response);
-            console.log(arrayPreguntas);            
+            myObj=JSON.parse(response) ;    
+            for (x in myObj) { 
+                arrayPreguntas[x].push(myObj[x].idPregunta);
+                arrayPreguntas[x].push(myObj[x].textoPregunta);
+            }     
+            console.log(arrayPreguntas);    
         }
     });
 
@@ -63,6 +66,7 @@ $(document).ready(function(){
             columns: [
                 { title: "idPregunta" },
                 { title: "textoPregunta" },
+                /*
                 { title: "estadoPregunta" },
                 { title: "fechaRecibida" },
                 { title: "textoRespuesta" },
@@ -71,6 +75,7 @@ $(document).ready(function(){
                 { title: "idItem" },
                 { title: "demoraRtaSeg" },
                 { title: "cantPreguntasUsuario" }
+                */
             ]
         } );
     } );
