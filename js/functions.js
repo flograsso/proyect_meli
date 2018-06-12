@@ -58,7 +58,7 @@ $(document).ready(function(){
      
     $(document).ready(function() {
         $('#example1').DataTable( {
-            data: dataSet,
+            data: arrayPreguntas,
             columns: [
                 { title: "idPregunta" },
                 { title: "textoPregunta" },
