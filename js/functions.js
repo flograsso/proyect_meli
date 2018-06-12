@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-  
-
     $("#enviarQuery").click(function() 
     {
         $.ajax({
@@ -80,19 +78,19 @@ $(document).ready(function(){
         [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
     ];
      
-    $('#example').DataTable( {
-        destroy: true,
-        data: dataSet,
-        columns: [
-            { title: "Name" },
-            { title: "Position" },
-            { title: "Office" },
-            { title: "Extn." },
-            { title: "Start date" },
-            { title: "Salary" }
-        ]
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            data: dataSet,
+            columns: [
+                { title: "Name" },
+                { title: "Position" },
+                { title: "Office" },
+                { title: "Extn." },
+                { title: "Start date" },
+                { title: "Salary" }
+            ]
+        } );
     } );
-    
     
       
 
