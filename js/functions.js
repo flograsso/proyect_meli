@@ -78,8 +78,8 @@ $(document).ready(function(){
         [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
     ];
      
-    $(document).ready(function() {
-        $('#myTable').DataTable( {
+    
+        $('#example').DataTable( {
             data: dataSet,
             columns: [
                 { title: "Name" },
@@ -90,7 +90,7 @@ $(document).ready(function(){
                 { title: "Salary" }
             ]
         } );
-    } );
+    
     
       
 
