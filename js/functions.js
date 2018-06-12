@@ -82,6 +82,7 @@ $(document).ready(function(){
      
     $('#example').dataTable().fnDestroy();
     $('#example').DataTable( {
+        destroy: true,
         data: dataSet,
         columns: [
             { title: "Name" },
