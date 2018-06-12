@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var jsonPreguntas;
+    var arrayPreguntas;
 
     $("#enviarQuery").click(function() 
     {
@@ -25,8 +25,8 @@ $(document).ready(function(){
                     'method':'getQuestions',
                 },
         success:  function (response) {
-            jsonPreguntas=response;     
-            alert(response);            
+            arrayPreguntas=JSON.parse(response) ;    
+            alert(arrayPreguntas);            
         }
     });
 
