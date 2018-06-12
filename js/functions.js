@@ -27,8 +27,8 @@ $(document).ready(function(){
         success:  function (response) {
             myObj=JSON.parse(response) ;    
             for (x in myObj) { 
-                arrayPreguntas[x].push(myObj[x].idPregunta);
-                arrayPreguntas[x].push(myObj[x].textoPregunta);
+                arrayPreguntas[x][0]=(myObj[x].idPregunta);
+                arrayPreguntas[x][1]=(myObj[x].textoPregunta);
             }     
             console.log(arrayPreguntas);    
         }
