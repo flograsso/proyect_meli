@@ -1,16 +1,6 @@
 $(document).ready(function(){
 
-    $('#example').DataTable( {
-        data: dataSet,
-        columns: [
-            { title: "Name" },
-            { title: "Position" },
-            { title: "Office" },
-            { title: "Extn." },
-            { title: "Start date" },
-            { title: "Salary" }
-        ]
-    } );
+  
 
     $("#enviarQuery").click(function() 
     {
@@ -90,8 +80,18 @@ $(document).ready(function(){
         [ "Unity Butler", "Marketing Designer", "San Francisco", "5384", "2009/12/09", "$85,675" ]
     ];
      
-    
-
+    $('#example').dataTable().fnDestroy();
+    $('#example').DataTable( {
+        data: dataSet,
+        columns: [
+            { title: "Name" },
+            { title: "Position" },
+            { title: "Office" },
+            { title: "Extn." },
+            { title: "Start date" },
+            { title: "Salary" }
+        ]
+    } );
     
     
       
