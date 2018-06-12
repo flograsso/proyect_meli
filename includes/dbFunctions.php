@@ -37,6 +37,18 @@ function getAllValuesDb($table)
     return json_encode($outp);
 }
 
+function getAllValuesDbNotJson($table)
+{
+    global $conn;
+    $sql="SELECT * FROM `$table` WHERE 1;";
+    $result = $conn->query($sql);
+    while ($data = mysql_fetch_assoc($result))
+    {
+        $arreglo=["data"][]=$data;
+    }
+    return json_encode($arreglo);
+}
+
 function checkExistsValue($table,$field,$value)
 {
     global $conn; 

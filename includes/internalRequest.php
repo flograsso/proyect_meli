@@ -14,7 +14,7 @@ switch ($METHOD)
         echo json_encode(getMeli($path));
         break;
     case "getQuestions":
-        echo getAllValuesDb('questions');
+        echo getAllValuesDbNotJson('questions');
         break;
 
 	default:

@@ -17,14 +17,25 @@ $(document).ready(function(){
     });
 
     $('#myTable').DataTable( {
-        "processing": true,
-        "serverSide": true,
         "ajax": {
             "url": "includes/internalRequest.php",
-                data: {
-                "method":"getQuestions"
-            }
-        }
+            "data": {
+                    "method":"getQuestions"
+            },
+            "method":"POST"
+        },
+        "columns": [
+            { "data": "idPregunta" },
+            { "data": "textoPregunta" },
+            { "data": "estadoPregunta" },
+            { "data": "fechaRecibida" },
+            { "data": "textoRespuesta" },
+            { "data": "fechaRespuesta" },
+            { "data": "idUsuario" },
+            { "data": "idItem" },
+            { "data": "demoraRtaSeg" },
+            { "data": "cantPreguntasUsuario" }
+        ]
     } );
     
       
