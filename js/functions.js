@@ -21,9 +21,8 @@ $(document).ready(function(){
         "serverSide": true,
         "ajax": {
             "url": "includes/internalRequest.php",
-            "data": function ( d ) {
-                d.method = "getQuestions";
-
+                data: {
+                "method":"getQuestions"
             }
         }
     } );
