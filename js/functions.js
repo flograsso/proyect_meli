@@ -26,7 +26,8 @@ $(document).ready(function(){
                 },
         success:  function (response) {
             arrayPreguntas=JSON.parse(response) ;    
-            alert(arrayPreguntas);            
+            console.log(response);
+            console.log(arrayPreguntas);            
         }
     });
 
