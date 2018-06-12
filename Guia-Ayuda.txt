@@ -1,0 +1,15 @@
+Autenticación
+
+1) Ejecuto https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=App_id
+   Con mi appID y esto redirige a la una web de ML para que el usuario autorize la app.
+2) Una vez que autoriza, me redirige a mi web donde capturo el "code" que me da ML
+3) Con ese code (que dura 6hs) pido el acces_token que es lo que me da acceso a los recursos privados.
+4) El ACCES_TOKEN es quien me da acceso a todo. Este dura 8hs
+5) Si la app esta configurada como offline, tambien recibiremos un refresh_token 
+
+
+
+DB
+
+Crear DB 
+$sql = "CREATE TABLE `token` ( `access_token` TEXT NULL , `refresh_token` TEXT NULL , `expires_in` TEXT NULL );";
