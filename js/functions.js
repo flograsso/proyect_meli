@@ -44,11 +44,10 @@ $(document).ready(function(){
 
 function addRow(table,content)
 {
+    $("#"+table + " tbody").append("<tr");
     for (x in content)
-    {
-        $("#"+table + " tbody").append("<tr");
-        $("#"+table + " tbody").append("<td>"+content[x]+"</td>");
-        $("#"+table + " tbody").append("</tr");
-        
+    { 
+        $("#"+table + " tbody").append("<td>"+content[x]+"</td>"); 
     }
+    $("#"+table + " tbody").append("</tr");
 }
