@@ -36,7 +36,7 @@ $(document).ready(function(){
                data.push(myObj[x].fechaRespuesta);
                addRow("table-listaPreguntas",data); 
             }
-            //$('#table-listaPreguntas').DataTable();     
+            $('#table-listaPreguntas').DataTable();     
             var table = $('#table-listaPreguntas').DataTable({
                 "columnDefs": [{
                     "visible": false,
@@ -63,6 +63,7 @@ $(document).ready(function(){
                 }
             });
             // Order by the grouping
+            /*
             $('#table-listaPreguntas tbody').on('click', 'tr.group', function() {
                 var currentOrder = table.order()[0];
                 if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
@@ -76,13 +77,13 @@ $(document).ready(function(){
 
 });
 
-function addRow(table,content)
+function addRow(_table,_content)
 {
-    $("#"+table + " tbody").append("<tr>");
-    for (x in content)
+    $("#"+_table + " tbody").append("<tr>");
+    for (x in _content)
     { 
-        $("#"+table + " tbody").append("<td>"+content[x]+"</td>"); 
+        $("#"+_table + " tbody").append("<td>"+_content[x]+"</td>"); 
     }
-    $("#"+table + " tbody").append("</tr>");
+    $("#"+_table + " tbody").append("</tr>");
 }
 
