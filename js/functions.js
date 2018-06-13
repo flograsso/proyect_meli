@@ -63,7 +63,7 @@ $(document).ready(function(){
                 }
             });
             // Order by the grouping
-            /*
+            
             $('#table-listaPreguntas tbody').on('click', 'tr.group', function() {
                 var currentOrder = table.order()[0];
                 if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
@@ -72,7 +72,7 @@ $(document).ready(function(){
                     table.order([2, 'asc']).draw();
                 }
             });
-            */
+            
         }
     });
 
