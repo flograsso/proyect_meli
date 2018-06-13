@@ -37,7 +37,14 @@ $(document).ready(function(){
                addRow("table-listaPreguntas",data); 
             }
             $("#table-listaPreguntas").DataTable( {
-                "order": [[ 3, "desc" ]]
+                "displayLength": 25,
+                "order": [
+                    [2, 'asc']
+                ],
+                "columnDefs": [{
+                    "visible": false,
+                    "targets": 2
+                }],
             } );
             
         }
