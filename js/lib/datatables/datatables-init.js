@@ -1,7 +1,7 @@
 $(document).ready(function() {
         $('#table-listaPreguntas').DataTable();
         $(document).ready(function() {
-            var table = $('#example').DataTable({
+            var table = $('#table-listaPreguntas').DataTable({
                 "columnDefs": [{
                     "visible": false,
                     "targets": 2
@@ -27,7 +27,7 @@ $(document).ready(function() {
                 }
             });
             // Order by the grouping
-            $('#example tbody').on('click', 'tr.group', function() {
+            $('#table-listaPreguntas tbody').on('click', 'tr.group', function() {
                 var currentOrder = table.order()[0];
                 if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
                     table.order([2, 'desc']).draw();
