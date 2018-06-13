@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-        $('#table-listaPreguntas').DataTable();
+        
         
     });
     $('#example23').DataTable({
