@@ -215,7 +215,7 @@ function procesarMensaje($idmensaje)
     global $access_token;
     $url = '/messages/' . $idmensaje;
     $result = $meli->get($url, array('access_token' => $access_token));
-
+    echo "Procesando mensaje";
     if ($result["httpCode"]==200)
     {
         $text=$result["body"]->text;
@@ -230,6 +230,7 @@ function procesarMensaje($idmensaje)
         }
         else
         {
+            echo "No existe";
             setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  $text->plain . "','" . $moderation->status . "'");
         }
     }
