@@ -1,5 +1,5 @@
 $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#table-listaPreguntas').DataTable();
         $(document).ready(function() {
             var table = $('#example').DataTable({
                 "columnDefs": [{
