@@ -39,7 +39,7 @@ $(document).ready(function(){
             
         }
     });
-    $('#table-listaPreguntas').DataTable();
+    $("#table-listaPreguntas").DataTable();
 
 });
 
