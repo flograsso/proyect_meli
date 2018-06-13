@@ -43,13 +43,13 @@ $(document).ready(function(){
 
 });
 
-function addRow($table,$content)
+function addRow(table,content)
 {
     for (x in myObj)
     {
-        $("#"+$table + " tbody").append("<tr");
-        $("#"+$table + " tbody").append("<td>"+myObj[x]+"</td>");
-        $("#"+$table + " tbody").append("</tr");
+        $("#"+table + " tbody").append("<tr");
+        $("#"+table + " tbody").append("<td>"+myObj[x]+"</td>");
+        $("#"+table + " tbody").append("</tr");
         
     }
 }
