@@ -55,7 +55,6 @@ function addRow(table,content)
 function initTable()
 {
     $('#table-listaPreguntas').DataTable();
-    $(document).ready(function() {
         var table = $('#table-listaPreguntas').DataTable({
             "columnDefs": [{
                 "visible": false,
@@ -90,5 +89,4 @@ function initTable()
                 table.order([2, 'asc']).draw();
             }
         });
-    });
 }
