@@ -215,7 +215,6 @@ function procesarMensaje($idmensaje)
     global $access_token;
     $url = '/messages/' . $idmensaje;
     $result = $meli->get($url, array('access_token' => $access_token));
-    echo "Procesando mensaje";
     if ($result["httpCode"]==200)
     {
         $text=$result["body"]->text;
