@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    debugger;
+    
         $('#table-listaPreguntas').DataTable();
         
         $(document).ready(function() {
@@ -13,6 +13,7 @@ $(document).ready(function() {
                 ],
                 "displayLength": 25,
                 "drawCallback": function(settings) {
+                    debugger;
                     var api = this.api();
                     var rows = api.rows({
                         page: 'current'
