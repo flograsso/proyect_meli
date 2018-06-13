@@ -55,11 +55,15 @@ $(document).ready(function(){
 
 function addRow(_table,_content)
 {
+    var str="<tr>";
+     
     $("#"+_table + " tbody").append("<tr>");
     for (x in _content)
-    { 
-        $("#"+_table + " tbody").append("<td>"+_content[x]+"</td>"); 
+    {  
+        str=str+"<td>"+_content[x]+"</td>"
     }
-    $("#"+_table + " tbody").append("</tr>");
+    str=str+"</tr>";
+
+    $("#"+_table + " tbody").append(str);
 }
 
