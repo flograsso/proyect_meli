@@ -220,6 +220,7 @@ function procesarMensaje($idmensaje)
         $text=$result["body"]->text;
         $from=$result["body"]->from;
         $moderation=$result["body"]->moderation;
+        $to=$result["body"]->to;
         
         if (checkExistsValue('messages','message_id',$idmensaje))
         {
@@ -229,7 +230,7 @@ function procesarMensaje($idmensaje)
         }
         else
         {
-            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status . "'");
+            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to->to_user_id . "','" . $to->to_user_name . "','" ."'");
         }
     }
     else
