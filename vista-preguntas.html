@@ -13,7 +13,6 @@
     <title>Ela - Bootstrap Admin Dashboard Template</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
 
 	
     <!-- Custom CSS -->
@@ -392,24 +391,19 @@
                                 <h4 class="card-title">Data Table</h4>
                                 <h6 class="card-subtitle">Data table example</h6>
                                 <div class="table-responsive m-t-40">
-                                        <table id="example1" class="display" width="100%"></table>
-                                    <table id="myTable1" class="table table-bordered table-striped">
+                                    <table id="table-listaPreguntas" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>idPregunta</th>
-                                                <th>textoPregunta</th>
-                                                <th>estadoPregunta</th>
-                                                <th>fechaRecibida</th>
-                                                <th>textoRespuesta</th>
-                                                <th>fechaRespuesta</th>
-                                                <th>idUsuario</th>
-                                                <th>idItem</th>
-                                                <th>demoraRtaSeg</th>
-                                                <th>cantPreguntasUsuario</th>
-
+                                                <th>Pregunta</th>
+                                                <th>Respuesta</th>
+                                                <th>Demora(min)</th>
+                                                <th>Recibida</th>
+                                                <th>Respondida</th>
                                             </tr>
                                         </thead>
-                             
+                                        <tbody>
+                                            
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>
@@ -450,7 +444,6 @@
     <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <script src="js/lib/datatables/datatables-init.js"></script>
-	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script src="js/functions.js"></script>
     
 </body>

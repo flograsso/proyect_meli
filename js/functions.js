@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var arrayPreguntas = [[]];
+
 
     $("#enviarQuery").click(function() 
     {
@@ -25,61 +25,31 @@ $(document).ready(function(){
                     'method':'getQuestions',
                 },
         success:  function (response) {
-            myObj=JSON.parse(response) ;    
+            myObj=JSON.parse(response) ;  
+            table-listaPreguntas  ;
+            var data = []
             for (x in myObj) { 
-                arrayPreguntas[x][0]=(myObj[x].idPregunta);
-                arrayPreguntas[x][1]=(myObj[x].textoPregunta);
+               data=[];
+               data.push(myObj[x].textoPregunta);
+               data.push(myObj[x].textoRespuesta);
+               data.push(Math.round(myObj[x].demoraRtaSeg / 60));
+               data.push(myObj[x].fechaRecibida);
+               data.push(myObj[x].fechaRespuesta);
+               addRow("table-listaPreguntas",data); 
             }     
-            console.log(arrayPreguntas);    
+              
         }
     });
 
-
-    /*
-    $('#myTable').DataTable( {
-        "ajax": {
-            "url": "includes/internalRequest.php",
-            "data": {
-                    "method":"getQuestions"
-            },
-            "method":"POST"
-        },
-        "columns": [
-            { "data": "idPregunta" },
-            { "data": "textoPregunta" },
-            { "data": "estadoPregunta" },
-            { "data": "fechaRecibida" },
-            { "data": "textoRespuesta" },
-            { "data": "fechaRespuesta" },
-            { "data": "idUsuario" },
-            { "data": "idItem" },
-            { "data": "demoraRtaSeg" },
-            { "data": "cantPreguntasUsuario" }
-        ]
-    } );
-*/
-    
-     
-    $(document).ready(function() {
-        $('#example1').DataTable( {
-            data: arrayPreguntas,
-            columns: [
-                { title: "idPregunta" },
-                { title: "textoPregunta" },
-                /*
-                { title: "estadoPregunta" },
-                { title: "fechaRecibida" },
-                { title: "textoRespuesta" },
-                { title: "fechaRespuesta" },
-                { title: "idUsuario" },
-                { title: "idItem" },
-                { title: "demoraRtaSeg" },
-                { title: "cantPreguntasUsuario" }
-                */
-            ]
-        } );
-    } );
-    
-      
-
 });
+
+function addRow($table,$content)
+{
+    for (x in myObj)
+    {
+        $("#"+$table + " tbody").append("<tr");
+        $("#"+$table + " tbody").append("<td>"+myObj[x]+"</td>");
+        $("#"+$table + " tbody").append("</tr");
+        
+    }
+}
