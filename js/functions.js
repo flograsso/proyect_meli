@@ -57,7 +57,6 @@ function addRow(_table,_content)
 {
     var str="<tr>";
      
-    $("#"+_table + " tbody").append("<tr>");
     for (x in _content)
     {  
         str=str+"<td>"+_content[x]+"</td>"
