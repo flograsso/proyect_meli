@@ -36,10 +36,11 @@ $(document).ready(function(){
                data.push(myObj[x].fechaRespuesta);
                addRow("table-listaPreguntas",data); 
             }
+            $("#table-listaPreguntas").DataTable();
             
         }
     });
-    $("#table-listaPreguntas").DataTable();
+    
 
 });
 
