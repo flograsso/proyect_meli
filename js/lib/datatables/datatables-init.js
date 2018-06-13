@@ -1,5 +1,7 @@
 $(document).ready(function() {
+    debugger;
         $('#table-listaPreguntas').DataTable();
+        
         $(document).ready(function() {
             var table = $('#table-listaPreguntas').DataTable({
                 "columnDefs": [{
