@@ -13,8 +13,8 @@ switch ($METHOD)
         $path=$_POST["query"];
         echo json_encode(getMeli($path));
         break;
-    case "getQuestions":
-        echo getAllValuesDb('questions');
+    case "getQuestionsUnanswered":
+        echo getValueConditionDb('questions',"`estadoPregunta`='ANSWERED'");
         break;
 
 	default:

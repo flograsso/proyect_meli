@@ -37,6 +37,17 @@ function getAllValuesDb($table)
     return json_encode($outp);
 }
 
+function getValueConditionDb($table,$condition)
+{
+    global $conn;
+    $sql="SELECT * FROM `$table` WHERE $condition;";
+    $result = $conn->query($sql);
+    $outp = array();
+    $outp = $result->fetch_all(MYSQLI_ASSOC);
+
+    return json_encode($outp);
+}
+
 function checkExistsValue($table,$field,$value)
 {
     global $conn; 

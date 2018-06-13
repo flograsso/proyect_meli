@@ -22,7 +22,7 @@ $(document).ready(function(){
         type: 'post',
         datatype: 'json',
         data: 	{
-                    'method':'getQuestions',
+                    'method':'getQuestionsUnanswered',
                 },
         success:  function (response) {
             myObj=JSON.parse(response) ;  
@@ -37,14 +37,11 @@ $(document).ready(function(){
                addRow("table-listaPreguntas",data); 
             }
             $("#table-listaPreguntas").DataTable( {
-                "displayLength": 25,
+                "displayLength": 10,
                 "order": [
-                    [2, 'asc']
+                    [3, 'desc']
                 ],
-                "columnDefs": [{
-                    "visible": false,
-                    "targets": 2
-                }],
+
             } );
             
         }
