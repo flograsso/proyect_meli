@@ -26,7 +26,6 @@ $(document).ready(function(){
                 },
         success:  function (response) {
             myObj=JSON.parse(response) ;  
-            table-listaPreguntas  ;
             var data = []
             for (x in myObj) { 
                data=[];
@@ -45,10 +44,10 @@ $(document).ready(function(){
 
 function addRow(table,content)
 {
-    for (x in myObj)
+    for (x in content)
     {
         $("#"+table + " tbody").append("<tr");
-        $("#"+table + " tbody").append("<td>"+myObj[x]+"</td>");
+        $("#"+table + " tbody").append("<td>"+content[x]+"</td>");
         $("#"+table + " tbody").append("</tr");
         
     }
