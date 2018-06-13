@@ -209,6 +209,38 @@ function procesarPregunta($idPregunta)
 
 }
 
+function procesarMensaje($idmensaje)
+{
+    global $meli;
+    global $access_token;
+    $url = '/messages/' . $idmensaje;
+    $result = $meli->get($url, array('access_token' => $access_token));
+
+    if ($result["httpCode"]==200)
+    {
+        $text=$result["body"]->text;
+        $from=$result["body"]->from;
+        $moderation=$result["body"]->moderation;
+        
+        if (checkExistsValue('messages','message_id',$idmensaje))
+        {
+            updateValueDb("messages",'date_received',$result["body"]->date_received,'message_id',$idmensaje);
+            updateValueDb("messages",'date_read',$result["body"]->date_read,'message_id',$idmensaje);
+            updateValueDb("messages",'moderada',$moderation->status,'message_id',$idmensaje);
+        }
+        else
+        {
+            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  $text->plain . "','" . $moderation->status . "'");
+        }
+    }
+    else
+    {
+        echo "Error en httpCode" . $result["httpCode"];
+    }
+
+
+}
+
 function diffDatesSeg($dateA,$dateQ)
 {
     return round(strtotime($dateA) - strtotime($dateQ));

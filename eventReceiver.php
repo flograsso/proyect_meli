@@ -20,6 +20,9 @@ switch($topic)
         $resource= preg_replace("/[^0-9]/","", $resource);
         procesarPregunta($resource);
         break;
+    case "messages":
+        procesarMensaje($resource);
+        break;
 
     default:
         $str = "{";
