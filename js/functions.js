@@ -36,25 +36,12 @@ $(document).ready(function(){
                data.push(myObj[x].fechaRespuesta);
                addRow("table-listaPreguntas",data); 
             }     
-            initTable();    
+               
         }
     });
 
-});
-
-function addRow(table,content)
-{
-    $("#"+table + " tbody").append("<tr>");
-    for (x in content)
-    { 
-        $("#"+table + " tbody").append("<td>"+content[x]+"</td>"); 
-    }
-    $("#"+table + " tbody").append("</tr>");
-}
-
-function initTable()
-{
     $('#table-listaPreguntas').DataTable();
+    $(document).ready(function() {
         var table = $('#table-listaPreguntas').DataTable({
             "columnDefs": [{
                 "visible": false,
@@ -89,4 +76,17 @@ function initTable()
                 table.order([2, 'asc']).draw();
             }
         });
+    });
+
+});
+
+function addRow(table,content)
+{
+    $("#"+table + " tbody").append("<tr>");
+    for (x in content)
+    { 
+        $("#"+table + " tbody").append("<td>"+content[x]+"</td>"); 
+    }
+    $("#"+table + " tbody").append("</tr>");
 }
+
