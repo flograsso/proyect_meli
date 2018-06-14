@@ -230,7 +230,7 @@ function procesarMensaje($idmensaje)
         }
         else
         {
-            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to->user_id . "','" . $to->email ."'");
+            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read   ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to[0]->user_id . "','" . $to[0]->email ."'");
         }
     }
     else
