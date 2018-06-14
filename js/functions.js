@@ -56,7 +56,42 @@ $(document).ready(function(){
                         'date':$("#vista-preguntas-fecha").val(),
                     },
             success:  function (response) {
-                alert(response);
+                var time = []
+                var delay = [];
+                myObj = JSON.parse(response);	
+                for (x in myObj) {
+                    time.push(myObj[x].fechaRespuesta);
+                    delay.push(Math.round(myObj[x].demoraRtaSeg / 60));
+                }	
+
+                var chartdata = 
+				{
+					type: 'line',
+					data: 
+					{
+						labels:time,
+						datasets: 
+							[{
+							data: rssi,
+							label: "rssi+100",
+							backgroundColor: "rgba(241, 0, 0, 1)",
+							borderColor: "rgba(241, 0, 0, 1)",
+							fill:false,
+							
+						}],
+					},
+					options: {
+						scales: {
+							xAxes: [{
+								type: 'time',
+								
+								
+				
+							}]	
+
+						}
+					}
+				};
             }
 
         });

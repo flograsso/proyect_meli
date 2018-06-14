@@ -25,6 +25,8 @@ switch ($METHOD)
 
 }
 
+$conn->close;
+
 ?>
 
 

@@ -33,10 +33,7 @@ switch($topic)
         setValueDb("preguntas","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg","'1','$topic','$resource',NULL,'$str',NULL,NULL,NULL,NULL");
 }
 
-$date1='2018-04-05';
-$date2='2018-04-05';
-
-
+$conn->free_result();
 $conn->close;
 
 
