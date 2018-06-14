@@ -211,7 +211,7 @@
 						<li class="nav-label">Vistas</li>
 							  <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">Preguntas </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="vista-preguntas.html">Respuestas </a></li>
+                                <li><a href="vista-preguntas.php">Respuestas </a></li>
                                 <li><a href="index1.html">Analytics </a></li>
                             </ul>
 						</li>
