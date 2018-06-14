@@ -1,3 +1,12 @@
+<?php
+
+require_once ('includes/phpFunctions.php');
+global $meli;
+global $access_token;
+sec_session_start();
+if(login_check($mysqli) == true) {
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -833,3 +842,9 @@
 </body>
 
 </html>
+
+<?php
+}
+else { 
+    header("Location: login.php?error=Debe iniciar sesión para acceder a esta página");
+}
