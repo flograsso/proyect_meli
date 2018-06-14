@@ -16,7 +16,10 @@ switch ($METHOD)
     case "getQuestionsUnanswered":
         echo getValueConditionDb('questions',"`estadoPregunta`='ANSWERED'");
         break;
-
+    case "getQuestionsDelay":
+        $date=$_POST["date"];
+        echo getValueConditionDb('questions',"`fechaRecibida`='$date'");
+        break;
 	default:
 		break;
 

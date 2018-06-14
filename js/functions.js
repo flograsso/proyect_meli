@@ -46,6 +46,23 @@ $(document).ready(function(){
             
         }
     });
+    $("#vista-preguntas-fecha").change(function() {
+        $.ajax({
+            url: 'includes/internalRequest.php',
+            type: 'post',
+            datatype: 'json',
+            data: 	{
+                        'method':'getQuestionsDelay',
+                        'date':$("#vista-preguntas-fecha").val(),
+                    },
+            success:  function (response) {
+                alert(response);
+            }
+
+        });
+    });
+
+
     
 
 });

@@ -106,6 +106,19 @@ if(login_check($mysqli) == true) {
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Preguntas</h4>
+                                    <h6 class="card-subtitle">Listado de preguntas</h6>
+								</div>
+								<div class="col-xs" style="margin-top: 10px;margin-right:10px; margin-bottom: 20px;">
+									<input class="form-control" type="date" id="vista-preguntas-fecha">
+								</div>
+								<div class="sales-chart">
+									<canvas id="team-chart"></canvas>
+								</div>
+                            </div>
+
                         </div>
                     </div>
                     <!-- End PAge Content -->
@@ -148,6 +161,8 @@ if(login_check($mysqli) == true) {
             src="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
         <script src="js/functions.js"></script>
         <script src="js/lib/datatables/datatables-init.js"></script>
+        <script src="js/lib/chart-js/Chart.bundle.js"></script>
+        <script src="js/lib/chart-js/chartjs-init.js"></script>
         
 
     </body>
