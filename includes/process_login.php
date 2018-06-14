@@ -15,7 +15,7 @@ if (isset($_POST['email'], $_POST['p'])) {
     } else {
         // Inicio de sesión exitosa
         //header('Location: ../protected_page.php');
-        header("Location: login.php?error=Usuario o contraseña incorrectos");
+        header("Location: https://".$_SERVER['HTTP_HOST']."/login.php?error=Usuario o contraseña incorrectos");
     }
 } else {
     // Las variables POST correctas no se enviaron a esta página.
