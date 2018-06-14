@@ -48,6 +48,7 @@ if(login_check($mysqli) == true) {
     <div id="main-wrapper">
         <?php
         include("includes/header.php");
+        ?>
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
