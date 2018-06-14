@@ -18,7 +18,7 @@ switch ($METHOD)
         break;
     case "getQuestionsDelay":
         $date=$_POST["date"];
-        echo getValueConditionDb('questions',"`fechaRecibida`='$date'");
+        echo getValueConditionDb('questions',"DATE(`fechaRecibida`)='$date'");
         break;
 	default:
 		break;
