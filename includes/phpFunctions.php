@@ -250,6 +250,7 @@ function convertirFecha($date)
 {
     $fecha= date_create($date, timezone_open('America/Argentina/Buenos_Aires'));
     echo $fecha;
+    return $fecha;
 }
 
 function quitarSaltos($cadena)
