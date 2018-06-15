@@ -188,17 +188,21 @@ function procesarPregunta($idPregunta)
         
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
-            updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
-            updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
-            updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
-            updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
+            if (($result["body"] ->status =="ANSWERED") || ($result["body"] ->status =="UNANSWERED") )
+            {
+                updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
+                updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
+                updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
+                updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
+            }
         }
         else
         {
             if ($result["body"] ->status =="ANSWERED")
                 setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "'");
             else
-                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "'");
+                if ($result["body"] ->status =="UNANSWERED")
+                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "'");
         }
     }
     else
