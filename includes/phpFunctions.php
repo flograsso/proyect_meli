@@ -249,7 +249,6 @@ function diffDatesSeg($dateA,$dateQ)
 function convertirFecha($date)
 {
     $fecha= date_create($date, timezone_open('America/Argentina/Buenos_Aires'));
-    echo date_format($fecha, 'Y-m-d H:i:sP');
     return date_format($fecha, 'Y-m-d H:i:sP');
 }
 
