@@ -246,8 +246,9 @@ function diffDatesSeg($dateA,$dateQ)
     return round(strtotime($dateA) - strtotime($dateQ));
 }
 
-//Messages --> UTC
-//Questions --> -4 = America/Dominica
+//Convierte formato de fechas ya que depende a que recurso consulto de MeLi. El formato de fecha que devuelve
+//Messages --> UTC (+0)
+//Questions --> America/Dominica (-4)  
 function convertirFecha($date,$dateOrigin,$dateDestiny)
 {
     $fecha= date_create($date, timezone_open($dateOrigin));
