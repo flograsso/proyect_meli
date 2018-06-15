@@ -19,9 +19,11 @@ switch($topic)
     case "questions":
         $resource= preg_replace("/[^0-9]/","", $resource);
         procesarPregunta($resource);
+        $conn->close;
         break;
     case "messages":
         procesarMensaje($resource);
+        $conn->close;
         break;
 
     default:
@@ -31,10 +33,11 @@ switch($topic)
         }
         $str=$str."}";
         setValueDb("preguntas","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg","'1','$topic','$resource',NULL,'$str',NULL,NULL,NULL,NULL");
-}
+        $conn->close;
+    }
 
 
-$conn->close;
+
 
 
 
