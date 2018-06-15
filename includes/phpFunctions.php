@@ -249,6 +249,15 @@ function diffDatesSeg($dateA,$dateQ)
 function convertirFecha($date)
 {
     $fecha= date_create($date, timezone_open('America/Argentina/Buenos_Aires'));
+
+
+    echo date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
+    date_timezone_set($fecha, timezone_open('UTC'));
+    echo date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
+    date_timezone_set($fecha, timezone_open('Europe/London'));
+    echo date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
+
+
     return date_format($fecha, 'Y-m-d H:i:sP');
 }
 
