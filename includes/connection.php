@@ -8,9 +8,9 @@ $DB_PASSWORD=$url["pass"];
 $DB_NAME=substr($url["path"], 1);
 */
 $DB_HOST=getenv("db_host");
-$DB_USERNAME=getenv("branded_azd5889f");
-$DB_PASSWORD=getenv("n-2(NBApr5~e");
-$DB_NAME=getenv("branded_melidb");
+$DB_USERNAME=getenv("db_user");
+$DB_PASSWORD=getenv("db_pass");
+$DB_NAME=getenv("db_db");
 
 //get connection
 //(MySQLi Object-Oriented)
