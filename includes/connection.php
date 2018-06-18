@@ -21,8 +21,8 @@ $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 if(!$conn){
 	die("Connection failed: " . $conn->error);
 }
-
-$acentos = $conn->query("SET NAMES 'utf8'");
+else
+	$acentos = $conn->query("SET NAMES 'utf8'");
 
 
 ?>
