@@ -36,6 +36,8 @@ switch($topic)
         $conn->close;
     }
 
+    echo "Ok";
+
 
 
 
