@@ -16,7 +16,6 @@ $DB_NAME=getenv("db_db");
 //(MySQLi Object-Oriented)
 
 global $conn;
-echo "DB HOST " . $DB_HOST . "<br>";
 $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_NAME);
 
 if(!$conn){
