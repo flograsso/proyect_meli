@@ -27,13 +27,10 @@ switch($topic)
         break;
 
     default:
-        $str = "{";
-        foreach ($data as $key => $value) {
-            $str=$str ."$key" . ":" . "$value" . ",";
-        }
-        $str=$str."}";
-        setValueDb("preguntas","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg","'1','$topic','$resource',NULL,'$str',NULL,NULL,NULL,NULL");
+        $date = ($data["received"]);
+        procesarNotification($topic,$date,$resource);
         $conn->close;
+        break;
     }
 
     echo "Ok";
