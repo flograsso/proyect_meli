@@ -247,6 +247,10 @@ function procesarMensaje($idmensaje)
 
 }
 
+function procesarNotification($topic, $date, $resource)
+{
+    setValueDb("notifications","date,topic,resource","'". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') ."','" . $topic . "','" . $resource . "'");
+}
 function diffDatesSeg($dateA,$dateQ)
 {
     return round(strtotime($dateA) - strtotime($dateQ));
