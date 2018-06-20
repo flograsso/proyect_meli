@@ -285,7 +285,7 @@ function procesarOrden($idOrden)
         $orderItems=$result["body"]->order_items; //Vector
         $date=$result["body"]->date_closed;
         $status=$result["body"]->status;
-        $buyer_id=$buyer[0]->id;
+        $buyer_id=$buyer->id;
         $total_amount=$result["body"]->total_amount;
         $buyer_nick=$buyer[0]->nickname;
         
