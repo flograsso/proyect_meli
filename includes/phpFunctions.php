@@ -201,10 +201,10 @@ function procesarPregunta($idPregunta)
         else
         {
             if ($result["body"] ->status =="ANSWERED")
-                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "'");
+                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ) . "'");
             else
                 if ($result["body"] ->status =="UNANSWERED")
-                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "'");
+                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ). "'");
         }
     }
     else
@@ -299,6 +299,22 @@ function procesarOrden($idOrden)
         {
             setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
         }
+    }
+    else
+    {
+        echo "Error en httpCode" . $result["httpCode"];
+    }
+
+}
+
+function getItemTitle($itemId)
+{
+    global $meli;
+    $url = '/items/' . $itemId;
+    $result = $meli->get($url, array('access_token' => $access_token));
+    if ($result["httpCode"]==200)
+    {
+        return $result["body"]->title;
     }
     else
     {
