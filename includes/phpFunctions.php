@@ -287,7 +287,7 @@ function procesarOrden($idOrden)
         $status=$result["body"]->status;
         $buyer_id=$buyer->id;
         $total_amount=$result["body"]->total_amount;
-        $buyer_nick=$buyer[0]->nickname;
+        $buyer_nick=$buyer->nickname;
         
         if (checkExistsValue('orders','id',$idOrden))
         {
