@@ -25,6 +25,11 @@ switch($topic)
         procesarMensaje($resource);
         $conn->close;
         break;
+    case "orders_v2":
+        $resource= preg_replace("/[^0-9]/","", $resource);
+        procesarOrden($resource);
+        $conn->close;
+        break;
 
     default:
         $date = ($data["received"]);
