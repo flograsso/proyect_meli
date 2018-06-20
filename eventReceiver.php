@@ -1,6 +1,7 @@
 <!DOCTYPE html>
     <html lang="en" >
 <?php
+
 header("Content-Type: text/html;charset=utf-8");
 
 include ("includes/example_login.php");
