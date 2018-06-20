@@ -272,5 +272,39 @@ function quitarSaltos($cadena)
     return preg_replace("[\n|\r|\n\r]",' ', $cadena);
 }
 
+function procesarOrden($idOrden)
+{
+    global $meli;
+    global $access_token;
+    $url = '/orders/' . $idOrden;
+    $result = $meli->get($url, array('access_token' => $access_token));
+
+    if ($result["httpCode"]==200)
+    {
+        $buyer=$result["body"]->buyer; //Vector
+        $orderItems=$result["body"]->order_items; //Vector
+        $date=$result["body"]->date_closed;
+        $status=$result["body"]->status;
+        $buyer_id=$buyer[0]->id;
+        $total_amount=$result["body"]->total_amount;
+        $buyer_nick=$buyer[0]->nickname;
+        
+        if (checkExistsValue('orders','id',$idOrden))
+        {
+            updateValueDb("orders",'status',$status,$idOrden);
+            updateValueDb("orders",'date',$date,$idOrden);
+            updateValueDb("orders",'total_amount',$total_amount,$idOrden);
+        }
+        else
+        {
+            setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
+        }
+    }
+    else
+    {
+        echo "Error en httpCode" . $result["httpCode"];
+    }
+
+}
 
 ?>
