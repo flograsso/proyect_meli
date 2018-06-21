@@ -265,7 +265,7 @@ function convertirFecha($date,$dateOrigin,$dateDestiny)
     $fecha= date_create($date, timezone_open($dateOrigin));
     date_timezone_set($fecha, timezone_open($dateDestiny));
     echo "Fecha despues:" . date_format($fecha, 'Y-m-dTH:i:sP') . "<br>";
-    return date_format($fecha, 'Y-m-d H:i:sP');
+    return date_format($fecha, 'Y-m-dTH:i:sP');
 }
 
 function quitarSaltos($cadena)
