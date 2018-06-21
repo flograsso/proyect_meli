@@ -249,7 +249,7 @@ function procesarMensaje($idmensaje)
 
 function procesarNotification($topic, $date, $resource)
 {
-    setValueDb("notifications","date,topic,resource","'". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') ."','" . $topic . "','" . $resource . "'");
+    setValueDb("notifications","date,topic,resource","'". $date ."','" . $topic . "','" . $resource . "'");
 }
 function diffDatesSeg($dateA,$dateQ)
 {
@@ -264,7 +264,7 @@ function convertirFecha($date,$dateOrigin,$dateDestiny)
     echo "Fecha antes:" . $date . "<br>";
     $fecha= date_create($date, timezone_open($dateOrigin));
     date_timezone_set($fecha, timezone_open($dateDestiny));
-    echo "Fecha despues:" . date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
+    //echo "Fecha despues:" . date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
     return date_format($fecha, 'Y-m-d H:i:sP');
 }
 
