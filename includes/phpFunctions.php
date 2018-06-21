@@ -190,7 +190,7 @@ function procesarPregunta($idPregunta)
         {
             if (($result["body"] ->status =="ANSWERED") || ($result["body"] ->status =="UNANSWERED") )
             {
-                updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','UTC'),'idPregunta',$idPregunta);
+                updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
                 updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
                 updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
                 updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
@@ -201,10 +201,10 @@ function procesarPregunta($idPregunta)
         else
         {
             if ($result["body"] ->status =="ANSWERED")
-                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','UTC') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','UTC') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ) . "'");
+                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ) . "'");
             else
                 if ($result["body"] ->status =="UNANSWERED")
-                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','UTC') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ). "'");
+                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ). "'");
         }
     }
     else
@@ -230,13 +230,13 @@ function procesarMensaje($idmensaje)
         
         if (checkExistsValue('messages','message_id',$idmensaje))
         {
-            updateValueDb("messages",'date_received',$result["body"]->date_received,'message_id',$idmensaje);
+            updateValueDb("messages",'date_received',convertirFecha($result["body"]->date_received,'UTC','America/Argentina/Buenos_Aires'),'message_id',$idmensaje);
             updateValueDb("messages",'date_read',$result["body"]->date_read,'message_id',$idmensaje);
             updateValueDb("messages",'moderada',$moderation->status,'message_id',$idmensaje);
         }
         else
         {
-            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". $result["body"] ->date_received ."','".$result["body"] ->date_read ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to[0]->user_id . "','" . $to[0]->email ."'");
+            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". convertirFecha($result["body"] ->date_received,'UTC','America/Argentina/Buenos_Aires') ."','".convertirFecha($result["body"] ->date_read,'UTC','America/Argentina/Buenos_Aires')  ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to[0]->user_id . "','" . $to[0]->email ."'");
         }
     }
     else
@@ -249,7 +249,7 @@ function procesarMensaje($idmensaje)
 
 function procesarNotification($topic, $date, $resource)
 {
-    setValueDb("notifications","date,topic,resource","'". $date ."','" . $topic . "','" . $resource . "'");
+    setValueDb("notifications","date,topic,resource","'". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') ."','" . $topic . "','" . $resource . "'");
 }
 function diffDatesSeg($dateA,$dateQ)
 {
@@ -261,10 +261,10 @@ function diffDatesSeg($dateA,$dateQ)
 //Questions --> America/Dominica (-4)  
 function convertirFecha($date,$dateOrigin,$dateDestiny)
 {
-    echo "Fecha antes:" . $date . "<br>";
+    
     $fecha= date_create($date, timezone_open($dateOrigin));
     date_timezone_set($fecha, timezone_open($dateDestiny));
-    //echo "Fecha despues:" . date_format($fecha, 'Y-m-d H:i:sP') . "<br>";
+
     return date_format($fecha, 'Y-m-d H:i:sP');
 }
 
@@ -298,7 +298,7 @@ function procesarOrden($idOrden)
         }
         else
         {
-            setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". $date . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
+            setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
         }
     }
     else
