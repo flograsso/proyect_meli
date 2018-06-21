@@ -14,11 +14,11 @@ switch ($METHOD)
         echo json_encode(getMeli($path));
         break;
     case "getQuestionsUnanswered":
-        echo getValueConditionDb('questions',"`estadoPregunta`='ANSWERED'");
+        echo getValueConditionDb('*','questions',"`estadoPregunta`='ANSWERED'");
         break;
     case "getQuestionsDelay":
         $date=$_POST["date"];
-        echo getValueConditionDb('questions',"DATE(`fechaRecibida`)='$date'");
+        echo getValueConditionDb('*','questions',"DATE(`fechaRecibida`)='$date'");
         break;
 	default:
 		break;

@@ -10,9 +10,11 @@ global $conn;
 $data = json_decode(file_get_contents('php://input'), true);
 http_response_code(200);
 
+if (isset($data["topic"]))
+    $topic=($data["topic"]);
 
-$topic=($data["topic"]);
-$resource=($data["resource"]);
+if (isset($data["resource"]))
+    $resource=($data["resource"]);
 
 switch($topic) 
 {
@@ -30,7 +32,11 @@ switch($topic)
         procesarOrden($resource);
         $conn->close;
         break;
+    case "getQuestionNumber":
+        echo getValueConditionDb('questions',"estadoPregunta='UNANSWERED'","count(idPregunta)");
+        
 
+        break;
     default:
         $date = ($data["received"]);
         procesarNotification($topic,$date,$resource);
