@@ -34,8 +34,7 @@ switch($topic)
         break;
     case "getQuestionNumber":
         echo getValueConditionDb('questions',"estadoPregunta='UNANSWERED'","count(idPregunta)");
-        
-
+        $conn->close;
         break;
     default:
         $date = ($data["received"]);
