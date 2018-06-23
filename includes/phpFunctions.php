@@ -193,10 +193,6 @@ function procesarPregunta($idPregunta)
                 updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
                 updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
                 updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
-            
-            
-                
-            
         }
         else
         {

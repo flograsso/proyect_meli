@@ -6,7 +6,7 @@ require_once ('connection.php');
 function deleteValueDb($table,$conditionField,$conditionValue)
 {
     global $conn;
-    $sql="DELETE FROM `$table` WHERE `$conditionField`='$conditionValue;";
+    $sql="DELETE FROM `$table` WHERE $conditionField='$conditionValue';";
     $conn->query($sql);
 }
 
