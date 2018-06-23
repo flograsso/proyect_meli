@@ -188,18 +188,15 @@ function procesarPregunta($idPregunta)
         
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
-            if (! $answer->date_created === NULL )
-            {
+            
                 updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
                 updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
                 updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
                 updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
-            }
-            else
-            {
-                deleteValueDb('questions','idPregunta',$idPregunta);
-                echo "borrado";
-            }
+            
+            
+                
+            
         }
         else
         {
@@ -211,7 +208,9 @@ function procesarPregunta($idPregunta)
         }
     }
     else
-    {
+    {   
+        deleteValueDb('questions','idPregunta',$idPregunta);
+        echo "borrado";
         echo "Error en httpCode" . $result["httpCode"];
     }
 
