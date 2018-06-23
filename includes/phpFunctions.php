@@ -188,7 +188,7 @@ function procesarPregunta($idPregunta)
         
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
-            if (($result["body"] ->status =="ANSWERED") || ($result["body"] ->status =="UNANSWERED") )
+            if (! $answer->date_created === NULL )
             {
                 updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
                 updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
@@ -196,7 +196,10 @@ function procesarPregunta($idPregunta)
                 updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
             }
             else
+            {
                 deleteValueDb('questions','idPregunta',$idPregunta);
+                echo "borrado";
+            }
         }
         else
         {
