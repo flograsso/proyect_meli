@@ -36,9 +36,6 @@ switch($topic)
         echo getValueConditionDb('questions',"estadoPregunta='UNANSWERED'","count(idPregunta)");
         $conn->close;
         break;
-    case "test":
-        sendErrorMail();
-        break;
     default:
         if (isset($data["received"])){
             $date = ($data["received"]);

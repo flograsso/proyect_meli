@@ -3,6 +3,7 @@
 require_once ('Meli/meli.php');
 require_once ('configApp.php');
 require_once ("dbFunctions.php");
+require_once ('phpFunctions.php');
 
 
 //Variable que mantiene el estado de la conexión
@@ -67,6 +68,7 @@ if(isset($_GET['code']) || !empty($access_token))
 } 
 	else 
 	{
+		sendErrorMail();
 		echo '<a href="https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id='.$appId.'&redirect_uri=https://pruebameli.herokuapp.com/includes/example_login.php">Login using MercadoLibre oAuth 2.0</a>';
 	}
 
