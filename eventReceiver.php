@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-    <html lang="en" >
-<?php
+<html lang="en">
+    <?php
 header("Content-Type: text/html;charset=utf-8");
 
 include ("includes/example_login.php");
@@ -11,26 +11,32 @@ $data = json_decode(file_get_contents('php://input'), true);
 http_response_code(200);
 
 if (isset($data["topic"]))
-    $topic=($data["topic"]);
+    $topic= filter_var($data["topic"], FILTER_SANITIZE_STRING);
 
 if (isset($data["resource"]))
-    $resource=($data["resource"]);
+    $resource=filter_var($data["resource"], FILTER_SANITIZE_STRING);
 
 switch($topic) 
 {
     case "questions":
-        $resource= preg_replace("/[^0-9]/","", $resource);
-        procesarPregunta($resource);
-        $conn->close;
+        if (isset($data["resource"]))
+        {
+            $resource= preg_replace("/[^0-9]/","", $resource);
+            procesarPregunta($resource);
+            $conn->close;
+        }
         break;
     case "messages":
         procesarMensaje($resource);
         $conn->close;
         break;
     case "orders_v2":
-        $resource= preg_replace("/[^0-9]/","", $resource);
-        procesarOrden($resource);
-        $conn->close;
+        if (isset($data["resource"]))
+        {
+            $resource= preg_replace("/[^0-9]/","", $resource);
+            procesarOrden($resource);
+            $conn->close;
+        }
         break;
     case "getQuestionNumber":
         echo getValueConditionDb('questions',"estadoPregunta='UNANSWERED'","count(idPregunta)");

@@ -181,7 +181,7 @@ function procesarPregunta($idPregunta)
     $url = '/questions/' . $idPregunta;
     $result = $meli->get($url, array('access_token' => $access_token));
 
-    if ($result["httpCode"]==200)
+    if ($result['httpCode']==200)
     {
         $answer=$result["body"]->answer;
         $from=$result["body"]->from;

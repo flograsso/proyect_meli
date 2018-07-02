@@ -57,12 +57,16 @@ function getValueConditionDb($table,$condition,$select)
 function checkExistsValue($table,$field,$value)
 {
     global $conn; 
-    $sql="SELECT * FROM `$table` WHERE `$field`='$value';";
-    $result = $conn->query($sql);
+    if ($stmt = $conn->prepare('SELECT * FROM `$table` WHERE ' . $field . '=?')) {
+        $stmt->bind_param("s", $value);
+        $result = $stmt->execute();
+    }        
+    
     if ($result->num_rows > 0)
-       return true;
-    else
-        return false;
+    return true;
+ else
+     return false;
+
     
 }
 
