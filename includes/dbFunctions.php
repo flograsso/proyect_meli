@@ -63,9 +63,17 @@ function checkExistsValue($table,$field,$value)
     }        
     
     if ($result->num_rows > 0)
-    return true;
+    {
+        echo "true";
+        return true;
+
+    }
+    
  else
+ {  
+    echo "false";
      return false;
+ }
 
     
 }
