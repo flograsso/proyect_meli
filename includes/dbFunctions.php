@@ -60,6 +60,7 @@ function checkExistsValue($table,$field,$value)
     if ($stmt = $conn->prepare('SELECT * FROM `$table` WHERE ' . $field . '=?')) {
         $stmt->bind_param("s", $value);
         $result = $stmt->execute();
+        var_dump($result);
     }        
     
     if ($result->num_rows > 0)
