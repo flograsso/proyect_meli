@@ -175,7 +175,8 @@ function procesarPregunta($idPregunta)
         $answer=$result["body"]->answer;
         $from=$result["body"]->from;
         
-        echo convertirFecha2($answer->date_created);
+        echo "Antes: " . $answer->date_created . "<br>";
+        echo "Despues: " . convertirFecha2($answer->date_created). "<br>";;
         
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
