@@ -175,6 +175,8 @@ function procesarPregunta($idPregunta)
         $answer=$result["body"]->answer;
         $from=$result["body"]->from;
         
+        echo convertirFecha2($answer->date_created);
+        
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
             
@@ -246,6 +248,16 @@ function convertirFecha($date,$dateOrigin,$dateDestiny)
     date_timezone_set($fecha, timezone_open($dateDestiny));
     return date_format($fecha, 'Y-m-d H:i:sP');
 }
+
+function convertirFecha2($date)
+{
+    
+    $datetime =  DateTime::createFromFormat(ISO8601,$date);
+    $otherTZ = new DateTimeZone('GMT0');
+    $datetime ->setTimezone($otherTZ);
+
+    return $datetime->format('d-m-Y H:i:s');
+ }
 function quitarSaltos($cadena)
 {
     return preg_replace("[\n|\r|\n\r]",' ', $cadena);
