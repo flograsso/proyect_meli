@@ -257,7 +257,7 @@ function convertirFecha2($date)
     $otherTZ = new DateTimeZone('GMT0');
     $datetime ->setTimezone($otherTZ);
 
-    return $datetime->format('d-m-Y H:i:s');
+    return $datetime->format('Y-m-d\TH:i:sO');
  }
 function quitarSaltos($cadena)
 {
