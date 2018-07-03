@@ -252,7 +252,7 @@ function convertirFecha($date,$dateOrigin,$dateDestiny)
 function convertirFecha2($date)
 {
     
-    $datetime =  DateTime::createFromFormat(ISO8601,$date);
+    $datetime = new DateTime($date);
     $otherTZ = new DateTimeZone('GMT0');
     $datetime ->setTimezone($otherTZ);
 
