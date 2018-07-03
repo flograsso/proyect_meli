@@ -1,9 +1,7 @@
 <?php
-
 require_once ('Meli/meli.php');
 require_once ('configApp.php');
 require_once ("dbFunctions.php");
-
 function sec_session_start() {
     $session_name = 'meliSession';   // Configura un nombre de sesión personalizado.
     $secure = true;
@@ -26,7 +24,6 @@ function sec_session_start() {
     session_start();            // Inicia la sesión PHP.
     session_regenerate_id();    // Regenera la sesión, borra la previa. 
 }
-
 function login($email, $password, $conn) {
     global $conn;
     // Usar declaraciones preparadas significa que la inyección de SQL no será posible.
@@ -51,7 +48,6 @@ function login($email, $password, $conn) {
             // Si el usuario existe, revisa si la cuenta está bloqueada
             // por muchos intentos de conexión.
            
-
                 // Revisa que la contraseña en la base de datos coincida 
                 // con la contraseña que el usuario envió.
                 if ($db_password == $password) {
@@ -72,7 +68,6 @@ function login($email, $password, $conn) {
                     // Inicio de sesión exitoso
                     return true;
                 } else {
-
                     return false;
                 }
             
@@ -82,7 +77,6 @@ function login($email, $password, $conn) {
         }
     }
 }
-
 function login_check($conn) {
     global $conn;
     // Revisa si todas las variables de sesión están configuradas.
@@ -131,7 +125,6 @@ function login_check($conn) {
         return false;
     }
 }
-
 function esc_url($url) {
  
     if ('' == $url) {
@@ -162,7 +155,6 @@ function esc_url($url) {
         return $url;
     }
 }
-
 //$path = /questions/....
 function getMeli($path)
 {   
@@ -171,16 +163,13 @@ function getMeli($path)
     $result = $meli->get($path, array('access_token' => $access_token));
     return $result;
     
-
 }
-
 function procesarPregunta($idPregunta)
 {
     global $meli;
     global $access_token;
     $url = '/questions/' . $idPregunta;
     $result = $meli->get($url, array('access_token' => $access_token));
-
     if ($result['httpCode']==200)
     {
         $answer=$result["body"]->answer;
@@ -189,7 +178,7 @@ function procesarPregunta($idPregunta)
         if (checkExistsValue('questions','idPregunta',$idPregunta))
         {
             
-                updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created),'idPregunta',$idPregunta);
+                updateValueDb("questions",'fechaRespuesta',convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires'),'idPregunta',$idPregunta);
                 updateValueDb("questions",'textoRespuesta',$answer->text,'idPregunta',$idPregunta);
                 updateValueDb("questions",'demoraRtaSeg',diffDatesSeg($answer->date_created,$result["body"]->date_created),'idPregunta',$idPregunta);
                 updateValueDb("questions",'estadoPregunta',$result["body"]->status,'idPregunta',$idPregunta);
@@ -197,10 +186,10 @@ function procesarPregunta($idPregunta)
         else
         {
             if ($result["body"] ->status =="ANSWERED")
-                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created) . "','". $answer->text . "','" .convertirFecha($answer->date_created) . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ) . "'");
+                setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $answer->text . "','" .convertirFecha($answer->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "','". $from->id . "','" . $result["body"] ->item_id . "','" . diffDatesSeg($answer->date_created,$result["body"]->date_created) . "','". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ) . "'");
             else
                 if ($result["body"] ->status =="UNANSWERED")
-                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created) . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ). "'");
+                    setValueDb("questions","idPregunta,textoPregunta,estadoPregunta,fechaRecibida,textoRespuesta,fechaRespuesta,idUsuario,idItem,demoraRtaSeg,cantPreguntasUsuario,item_title","'$idPregunta','". $result["body"] ->text ."','".$result["body"] ->status."','". convertirFecha($result["body"] ->date_created,'America/Dominica','America/Argentina/Buenos_Aires') . "',NULL,NULL,'" . $from->id . "','" . $result["body"] ->item_id . "',NULL,'". $from->answered_questions . "','". getItemTitle($result["body"] ->item_id ). "'");
         }
     }
     else
@@ -209,10 +198,7 @@ function procesarPregunta($idPregunta)
         echo "borrado";
         echo "Error en httpCode" . $result["httpCode"];
     }
-
-
 }
-
 function procesarMensaje($idmensaje)
 {
     global $meli;
@@ -228,57 +214,48 @@ function procesarMensaje($idmensaje)
         
         if (checkExistsValue('messages','message_id',$idmensaje))
         {
-            updateValueDb("messages",'date_received',convertirFecha($result["body"]->date_received),'message_id',$idmensaje);
+            updateValueDb("messages",'date_received',convertirFecha($result["body"]->date_received,'UTC','America/Argentina/Buenos_Aires'),'message_id',$idmensaje);
             updateValueDb("messages",'date_read',$result["body"]->date_read,'message_id',$idmensaje);
             updateValueDb("messages",'moderada',$moderation->status,'message_id',$idmensaje);
         }
         else
         {
-            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". convertirFecha($result["body"] ->date_received) ."','".convertirFecha($result["body"] ->date_read)  ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to[0]->user_id . "','" . $to[0]->email ."'");
+            setValueDb("messages","message_id,date_received,date_read,from_user_id,from_name,text,order_id,moderada,to_user_id,to_user_name","'$idmensaje','". convertirFecha($result["body"] ->date_received,'UTC','America/Argentina/Buenos_Aires') ."','".convertirFecha($result["body"] ->date_read,'UTC','America/Argentina/Buenos_Aires')  ."','". $from->user_id . "','" . $from->name ."','" .  quitarSaltos($text->plain) . "','". $result["body"] ->resource_id ."','" . $moderation->status ."','". $to[0]->user_id . "','" . $to[0]->email ."'");
         }
     }
     else
     {
         echo "Error en httpCode" . $result["httpCode"];
     }
-
-
 }
-
 function procesarNotification($topic, $date, $resource)
 {
-    setValueDb("notifications","date,topic,resource","'". convertirFecha($date) ."','" . $topic . "','" . $resource . "'");
+    setValueDb("notifications","date,topic,resource","'". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') ."','" . $topic . "','" . $resource . "'");
 }
 function diffDatesSeg($dateA,$dateQ)
 {
     return round(strtotime($dateA) - strtotime($dateQ));
 }
-
 //Convierte formato de fechas ya que depende a que recurso consulto de MeLi. El formato de fecha que devuelve
 //Messages --> UTC (+0)
 //Questions --> America/Dominica (-4)  
-function convertirFecha($date)
+function convertirFecha($date,$dateOrigin,$dateDestiny)
 {
-    $datetime = new DateTime($date);
-    $otherTZ = new DateTimeZone('GMT0');
-    $datetime ->setTimezone($otherTZ);
-
-    return $datetime->format('d-m-Y H:i:s');
+    
+    $fecha= date_create($date, timezone_open($dateOrigin));
+    date_timezone_set($fecha, timezone_open($dateDestiny));
+    return date_format($fecha, 'Y-m-d H:i:sP');
 }
-
-
 function quitarSaltos($cadena)
 {
     return preg_replace("[\n|\r|\n\r]",' ', $cadena);
 }
-
 function procesarOrden($idOrden)
 {
     global $meli;
     global $access_token;
     $url = '/orders/' . $idOrden;
     $result = $meli->get($url, array('access_token' => $access_token));
-
     if ($result["httpCode"]==200)
     {
         $buyer=$result["body"]->buyer; //Vector
@@ -297,16 +274,14 @@ function procesarOrden($idOrden)
         }
         else
         {
-            setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". convertirFecha($date) . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
+            setValueDb("orders","id,date,status,buyer_id,order_items,total_amount,buyer_nick","'" . $idOrden . "','". convertirFecha($date,'UTC','America/Argentina/Buenos_Aires') . "','" . $status . "','" . $buyer_id . "',NULL,'". $total_amount . "','" .$buyer_nick . "'");
         }
     }
     else
     {
         echo "Error en httpCode" . $result["httpCode"];
     }
-
 }
-
 function getItemTitle($itemId)
 {
     global $meli;
@@ -320,14 +295,11 @@ function getItemTitle($itemId)
     {
         echo "Error en httpCode" . $result["httpCode"];
     }
-
 }
-
 function sendErrorMail()
 {
     $url = 'http://api.pushingbox.com/pushingbox';
     $data = array('devid' => 'vC26046B397AC45D');
-
     // use key 'http' even if you send the request to https://...
     $options = array(
         'http' => array(
@@ -339,5 +311,4 @@ function sendErrorMail()
     $context  = stream_context_create($options);
     $result = file_get_contents($url, false, $context);
 }
-
 ?>
